@@ -5,7 +5,7 @@ function init_template(){
     add_theme_support('title-tag');
     
     register_nav_menus( array(
-        'top,menu' => 'Menú principal'
+        'top_menu' => 'Menú principal'
     ) );
 }
 
@@ -65,3 +65,18 @@ function productos_type(){
 }
 
 add_action( 'init', 'productos_type');
+
+add_action( 'init', 'pgRegisterTax');
+function pgRegisterTax(){
+    $args = array(
+        'hierarchical' => true,
+        'labels' => array(
+            'name' => 'Products Categories',
+            'singular_name' => 'Products Category',
+        ),
+        'show_in_nav_menu' => true,
+        'show_admin_column' => true,
+        'rewrite' => array('slug' => 'category-products'),
+    );
+    register_taxonomy( 'category-products', array('producto'), $args );
+}

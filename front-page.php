@@ -13,6 +13,15 @@
     <div class="lista-productos my-5">  
         <h2 class="text-center">PRODUCTS</h2>
         <div class="row">
+            <div class="col-12">
+                <select class="form-control" name="category-products" id="category-products">
+                    <option value="">All categories</option>
+                    <?php $terms = get_terms('category-products', array('hide_empty'=> true)); ?>
+                    <?php foreach($terms as $term){
+                        echo '<option value="'.$term->slug.'">'.$term->name.'</option>';
+                    }?>
+                </select>
+            </div>
             <?php
             $args = array(
                 'post_type' => 'producto',
@@ -28,7 +37,7 @@
                     $productos->the_post();
                     ?>
 
-                    <div class="col-4">
+                    <div class="col-4" id="#products-results">
                         <figure>
                             <?php the_post_thumbnail('large')?>
                         </figure>
